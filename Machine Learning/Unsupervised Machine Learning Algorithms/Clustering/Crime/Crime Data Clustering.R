@@ -34,7 +34,7 @@ d
 cluster1 = hclust(d, method = "centroid") # Doing hierarchical clustering using centroid method which gives the distance between center points clusters
 plot(cluster1) 
 
-tree1 <- cutree(cluster1,k= 4)
+tree1 = cutree(cluster1,k= 4)
 tree1
 
 rect.hclust(cluster1, k=4, border = 2:6) # to superimpose rectangular compartments for each cluster on the tree with the rect.hclust() function
@@ -42,44 +42,44 @@ abline(h = 4, col = 'red') #we visually want to see the clusters on the dendrogr
 
 # suppressPackageStartupMessages(library(dendextend)) 
 # we can also use the color_branches() function from the dendextend library to visualize your tree with different colored branches.
-# complete_dend_cluster1 <- as.dendrogram(cluster1)
-# complete_col_dend_cluster1 <- color_branches(cluster1, k = 4)
+# complete_dend_cluster1 = as.dendrogram(cluster1)
+# complete_col_dend_cluster1 = color_branches(cluster1, k = 4)
 # plot(complete_col_dend_cluster1)
 
-groups <- data.frame("City"=crime[,1],"Cluster Number"=tree1) # dataframe about which city is in which cluster number
+groups = data.frame("City"=crime[,1],"Cluster Number"=tree1) # dataframe about which city is in which cluster number
 groups 
 
 # Using Average Linkage Method of hierarchical clustering
-cluster2 <- hclust(d, method = "average")
+cluster2 = hclust(d, method = "average")
 plot(cluster2)
 
-tree2 <- cutree(cluster2, k=4)
+tree2 = cutree(cluster2, k=4)
 
 rect.hclust(cluster2,k=4, border="blue")
 
-group2 <- data.frame("City"=crime[,1], "cluster number"= tree2)# dataframe about which city is in which cluster number
+group2 = data.frame("City"=crime[,1], "cluster number"= tree2)# dataframe about which city is in which cluster number
 group2
 
 # Using Complete Linkage Method of hierarchical clustering
-cluster3 <- hclust(d, method = "complete")  #maximum distance
+cluster3 = hclust(d, method = "complete")  #maximum distance
 plot(cluster3)
 
-tree3 <- cutree(cluster3, k=4)
+tree3 = cutree(cluster3, k=4)
 
 rect.hclust(cluster3,k=4, border=2:6)
 
-group3 <- data.frame("City"=crime[,1], "cluster number"= tree3)
+group3 = data.frame("City"=crime[,1], "cluster number"= tree3)
 group3
 
 # Using single Linkage Method of hierarchical clustering
-cluster4 <- hclust(d, method = "single")  #minimum distance
+cluster4 = hclust(d, method = "single")  #minimum distance
 plot(cluster4)
 
-tree4 <- cutree(cluster4, k=5)
+tree4 = cutree(cluster4, k=5)
 
 rect.hclust(cluster4,k=4, border=2:6)
 
-group4 <- data.frame("City"=crime[,1], "cluster number"= tree4)
+group4 = data.frame("City"=crime[,1], "cluster number"= tree4)
 group4
 
 # Now lets do K-Means Clustering on the data
@@ -89,13 +89,13 @@ for (i in 2:15) wss[i] = sum(kmeans(crime1, centers = i)$withinss)
 plot(1:15,wss,type = "b", xlab = "No of Clusters", ylab = "Avg Distance")
 
 # Using the Elbow Plot we got the k value as 3
-k_mean_cluster <- kmeans(d,3)
+k_mean_cluster = kmeans(d,3)
 k_mean_cluster$centers
 k_mean_cluster$cluster
 print(k_mean_cluster)
 
 aggregate(crime1, by=list(cluster=k_mean_cluster$cluster), mean) #we compute the mean of each variables by clusters using the original data
-dd <- cbind(crime1, cluster5 = k_mean_cluster$cluster)   #add the point classifications to the original data
+dd = cbind(crime1, cluster5 = k_mean_cluster$cluster)   #add the point classifications to the original data
 head(dd)
 plot(dd)
 
@@ -107,7 +107,7 @@ k_mean_cluster$size  #cluster size
 k_mean_cluster$centers  # Cluster means
 
 
-final_Cluster_info <- data.frame("City"=crime[,1], "Cluster"=k_mean_cluster$cluster)
+final_Cluster_info = data.frame("City"=crime[,1], "Cluster"=k_mean_cluster$cluster)
 
 # Lets Perform Different Distance  Methods on the data
 
